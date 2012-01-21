@@ -1,0 +1,22 @@
+<% title "Product" %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @product.name %>
+</p>
+<p>
+<strong>Battery Life Month:</strong>
+  <%= @product.battlife_month %>
+</p>
+<p>
+<strong>Battery Life Year:</strong>
+  <%= @product.battlife_year %>
+</p>
+<strong>Usage Description:</strong>
+  <%= @product.description %>
+</p>
+<p>
+  <%= link_to "Edit", edit_product_path(@product) %> |
+  <%= button_to "Destroy", @product, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", products_path %>
+</p>

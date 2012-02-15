@@ -1,0 +1,9 @@
+psql -U postgres
+
+sudo launchctl load -w /Library/LaunchDaemons/org.macports.postgresql83-server.plist
+
+sudo su postgres -c '/opt/local/lib/postgresql84/bin/postgres -D /opt/local/var/db/postgresql84/defaultdb'
+
+CREATE ROLE abl WITH LOGIN ENCRYTPED PASSWORD 'abl';
+
+\du see list of roles

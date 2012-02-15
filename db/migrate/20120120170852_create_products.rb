@@ -3,8 +3,8 @@ class CreateProducts < ActiveRecord::Migration
     create_table :products do |t|
       t.string :name
       t.text :description
-      t.string :battlife_month
-      t.string :battlife_year
+      t.string :batt_life
+      t.string :purchase_date
       t.integer :user_id
 
       t.timestamps

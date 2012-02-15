@@ -1,17 +1,14 @@
-<% title "Products" %>
+<div id="abl-product-index">
+	<div id="abl-product-index-body" class="center-75">
+	<div id="abl-products-form" class="clearfix">
+		<%= render :partial => 'product_form' %>
+	</div>
 
-<% if current_user %>
-  <% for product in @products %>
-      	<td><%= product.name %></td>
-      	<td><%= link_to "Show", product %></td>
-      	<td><%= link_to "Edit", edit_product_path(product) %></td>
-      	<td><%= button_to "Destroy", product, :confirm => 'Are you sure?', :method => :delete %></td>
-		<p><%= link_to "New Product", new_product_path %></p>
-  <% end %>
-<% elsif %>
-    <% for product in @products %>
-      <td><%= product.name %></td>
-    <% end %>
-<% end %>
+	<div class="abl-products">
+		<%= render :partial => 'form_hidden' %>
+		<%= render :partial => 'product' %>
+	</div>
+
+</div>
 
 

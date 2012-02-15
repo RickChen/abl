@@ -1,21 +1,31 @@
-<%= form_for @product do |f| %>
+<%= form_for @product, :html => { :class => "abl-form" } do |f| %>
   <%= f.error_messages %>
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+  <p>	
+    <%= f.text_field :pid, :class => "hidden" %>
   </p>
   <p>
-    <%= f.label :battlife_month %><br />
-    <%= f.text_field :battlife_month %>
+    <%= f.text_field :batt_life, :class => "hidden" %>
   </p>
-  <p>
-    <%= f.label :battlife_year %><br />
-    <%= f.text_field :battlife_year %>
-  </p>
-  <p>
-    <%= f.label :description %><br />
+	
+  <p class="hidden">
+    <%= f.label "Describe your typical usage" %><br />
     <%= f.text_area :description %>
   </p>
 
-  <p><%= f.submit %></p>
+  <p>
+    <p><%= f.label "Start Typing in a Product Name: "%></p>
+    <%= f.text_field :name %>
+  </p>
+  <p class="abl-hint">Start with the brand, if you can't find your product we haven't added it just yet.<p>
+  
+  <p><%= f.label "Drag to save range of battery life"%></p>	
+  <p id="batt_life_slider"></p>
+  <p class="abl-hint">Best estimate! How many hours does your product currently last?<p>
+
+  <p>
+    <p><%= f.label "Select date of purchase:" %></p>
+    <%= f.text_field :purchase_date %>
+  </p>
+  <p class="abl-hint">We use this to help calculate battery life<p>
+  <p><%= submit_tag "Submit", :class => "thoughtbot" %></p>
 <% end %>

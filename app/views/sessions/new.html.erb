@@ -1,15 +1,20 @@
-<% title "Log in" %>
+<div id="abl-login" class="center-50">
+	<div id = "abl-login-form" class="center-50">
+		<h1>Log In</h1>
 
-<p>Don't have an account? <%= link_to "Sign up!", signup_path %></p>
+		<p>Don't have an account? <%= link_to "Sign up!", signup_path %></p>
 
-<%= form_tag sessions_path do %>
-  <p>
-    <%= label_tag :login, "Username or Email Address" %><br />
-    <%= text_field_tag :login, params[:login] %>
-  </p>
-  <p>
-    <%= label_tag :password %><br />
-    <%= password_field_tag :password %>
-  </p>
-  <p><%= submit_tag "Log in" %></p>
-<% end %>
+		<%= form_tag sessions_path do %>
+		<p>
+			<%= label_tag :login, "Username or Email Address" %><br />
+			<%= text_field_tag :login, params[:login] %>
+		</p>
+		<p>
+			<%= label_tag :password %><br />
+			<%= password_field_tag :password %>
+		</p>
+		<p><%= submit_tag "Log in", :class => "thoughtbot" %></p>
+		<% end %>
+	</div>
+
+</div>

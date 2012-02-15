@@ -1,0 +1,1 @@
+sudo env ARCHFLAGS="-arch x86_64" gem install curb

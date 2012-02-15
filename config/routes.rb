@@ -1,8 +1,10 @@
 Abl::Application.routes.draw do
-  
-  resources :products
 
   root :to => 'application#index'
+  
+  match "/products/index.js", :controller => 'products', :action => 'index', :format => :js
+  
+  match '/endpoints/getProductNames', :to => 'endpoints#getProductNames'
   
   match 'user/edit' => 'users#edit', :as => :edit_current_user
   
@@ -14,6 +16,10 @@ Abl::Application.routes.draw do
 
   match 'login' => 'sessions#new', :as => :login
 
+  resources :products
+  
+  resources :feed_products
+  
   resources :sessions
 
   resources :users

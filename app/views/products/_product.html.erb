@@ -1,0 +1,18 @@
+<% if @products.empty? %>
+	<%= render :partial => 'shared/no_results' %>
+<% else %>
+	<% for product in @products %>
+	<div class="abl-product-review clearfix">
+		<div class="abl-product-score right" >
+			<%= product.avg_score%> Hrs
+		</div>	
+	<h1><%= product.name %></h1>
+		<ul class="abl-product-review-sublinks left">
+			<li><%= link_to "Own this product?", new_product_path(:pid => product.id, :product_name => product.name),{:class=>"button-small white"} %></li>
+			<li><%= link_to "More", product, :class=>"button-small white" %></li>
+		</ul>
+
+	</div>
+	 <% end %>
+	<%= will_paginate @products %>
+<% end %>

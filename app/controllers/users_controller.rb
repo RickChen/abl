@@ -30,6 +30,6 @@ class UsersController < ApplicationController
   
   def show
     @user = current_user
-    @products = Product.where("user_id = ?", current_user.id)
+    @products = Product.where("user_id = ?", current_user.id).paginate(:per_page => 4, :page => params[:page])
   end
 end

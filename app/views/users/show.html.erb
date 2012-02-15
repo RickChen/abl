@@ -1,11 +1,13 @@
-#should i show all products here?
+<div id="abl-user-product-list" class="center-75">
 <% for product in @products %>
-    <tr>
-      <td><%= product.name %></td>
-      <td><%= link_to "Show", product %></td>
-      <td><%= link_to "Edit", edit_product_path(product) %></td>
-      <td><%= button_to "Destroy", product, :confirm => 'Are you sure?', :method => :delete %></td>
-    </tr>
-  <% end %>
-
-<p><%= link_to "New Product", new_product_path %></p>
+<div class="abl-product-review">
+	<h1><%= product.name %></h1>
+    <ul class="abl-user-product-sublinks">
+      <li><%= link_to "More", feed_product_path(product.pid) ,{:class=>"button-small white"} %></li>
+      <li><%= link_to "Edit", edit_product_path(product),{:class=>"button-small white"} %></li>
+      <li><%= link_to "Remove", product, :confirm => 'Are you sure?', :method => :delete, :class=>"button-small white" %></li>
+    </ul>
+</div>
+<% end %>
+<%= will_paginate @products %>
+</div>

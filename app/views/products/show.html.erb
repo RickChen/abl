@@ -1,22 +1,18 @@
 <% title "Product" %>
+<% for product in @products %>
+	<h1><%= product.name %></h1>
+	<p>
+	<strong>Name:</strong>
+	<%= product.name %>
+</p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @product.name %>
-</p>
-<p>
-<strong>Battery Life Month:</strong>
-  <%= @product.battlife_month %>
-</p>
-<p>
-<strong>Battery Life Year:</strong>
-  <%= @product.battlife_year %>
-</p>
-<strong>Usage Description:</strong>
-  <%= @product.description %>
-</p>
-<p>
-  <%= link_to "Edit", edit_product_path(@product) %> |
-  <%= button_to "Destroy", @product, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", products_path %>
-</p>
+	<% if current_user && current_user_product %>
+		<%= link_to "Edit", edit_product_path(product) %>
+			<%= button_to "Destroy", product, :confirm => 'Are you sure?', :method => :delete %>
+		<%= link_to "View All", products_path %>
+		<% elsif %>
+			<%= link_to "View All", products_path %>
+	<% end %>
+<% end %>
+
+

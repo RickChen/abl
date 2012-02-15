@@ -10,16 +10,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120120170852) do
+ActiveRecord::Schema.define(:version => 20120201035047) do
+
+  create_table "feed_products", :force => true do |t|
+    t.string   "name"
+    t.text     "summary"
+    t.string   "url"
+    t.datetime "published_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "avg_score"
+  end
 
   create_table "products", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.string   "battlife_month"
-    t.string   "battlife_year"
+    t.string   "batt_life"
+    t.string   "purchase_date"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "pid"
   end
 
   create_table "users", :force => true do |t|

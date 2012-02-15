@@ -1,0 +1,112 @@
+ABL = {
+  common: {
+    init: function() {
+      // application-wide code
+		$(document).ready(function(){
+			$("#flash_alert, #flash_notice").click(function(){
+				$(this).fadeOut(1000);
+			});
+			$('.abl-products-sort a, .pagination > a').live('click',function(){
+				$.getScript(this.href);
+				return false;
+			});
+
+			$("#abl-search-input").keyup(function(){
+				var ps = $('#new_product');
+				$.get(ps.attr('action'), ps.serialize(), null, "script");
+				return false;
+			});
+		});
+    }
+  },
+  products: {
+    init: function() {
+		var $pn = $("#product_name");
+      // controller-wide code
+		$pn.focus(function(){
+			$(this).val("");
+		});
+		$( "#batt_life_slider" ).slider({
+			range: true,
+			min: 1,
+			max: 24,
+			values: [ 1, 24 ],
+			slide: function( event, ui ) {
+						
+				$(".ui-slider-handle").first().html(
+					"<div class='abl-slide-hours'>" +
+					ui.values[ 0 ]+
+					"</div>"
+				);
+
+				$(".ui-slider-handle").next().html(
+					"<div class='abl-slide-hours'>" +
+					ui.values[ 1 ]+
+					"</div>"
+				);
+			}
+		});
+
+		$("#product_batt_life").val($( "#batt_life_slider" ).slider( "values", 0 ) +
+			"-" + $( "#batt_life_slider" ).slider( "values", 1 ) );
+		
+		$( "#product_purchase_date" ).datepicker();
+		
+		$( "#product_name" ).autocomplete({
+			source: function(req, res){
+				$.ajax({
+					url: "/endpoints/getProductNames",
+					dataType: "json",
+					data: {
+						term: this.term 
+					},
+					success: function( data ) {
+						res( $.map( data, function( item ) {
+							console.log(item);
+							return {
+								label: item.name,
+								pid: item.id
+							}
+						}));
+					}
+				});
+			},
+			minLength: 2,
+			select: function( event, ui ) {
+				$('#product_pid').val(ui.item.pid);
+				$pn.blur();
+			}
+		});
+    },
+	edit: function(){
+		$('#product_name').prop('disabled', true);
+	},
+    new: function() {
+      // action-specific code
+	//Here we want to grab all the data and render the graph and shit for all the cool stuff
+    }
+  }
+};
+
+UTIL = {
+  exec: function( controller, action ) {
+    var ns = ABL,
+        action = ( action === undefined ) ? "init" : action;
+
+    if ( controller !== "" && ns[controller] && typeof ns[controller][action] == "function" ) {
+      ns[controller][action]();
+    }
+  },
+
+  init: function() {
+    var body = document.body,
+        controller = body.getAttribute( "data-controller" ),
+        action = body.getAttribute( "data-action" );
+
+    UTIL.exec( "common" );
+    UTIL.exec( controller );
+    UTIL.exec( controller, action );
+  }
+};
+
+$( document ).ready( UTIL.init );

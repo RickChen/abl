@@ -1,0 +1,9 @@
+<%= form_tag("/products", :method => "get") do %>
+  <p class="clearfix">
+    <%= text_field_tag :search, params[:search], :id => "abl-search-input", :class => "abl-search left" %>
+    <%= submit_tag "Search", :name => nil, :id => "abl-search-btn", :class => 'thoughtbot left'  %>
+  </p>
+<p class="abl-hint">Start typing in the brand, the product name, then the model. e.g. Sony Bloggie Duo.
+</p>
+
+<% end %>
